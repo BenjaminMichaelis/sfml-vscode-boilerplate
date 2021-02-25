@@ -1,0 +1,23 @@
+name: Ubuntu Bash Build
+
+on:
+  push:
+    branches:
+      -  '*'
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build project with Ubuntu Bash
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Linux Dependencies
+        run: sudo apt-get update && sudo apt-get install libsfml-dev libxrandr-dev libxcursor-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev
+
+      - name: Build project
+        run: bash build.sh build
